@@ -17,7 +17,7 @@ const __dirname = path.resolve();
 
 app.use(
   cors({
-    origin: "https://chat-app2-jhon.onrender.com",
+    origin: "https://chat-app2-psi.vercel.app",
     credentials: true, // allow frontend to send cookies
   })
 );
