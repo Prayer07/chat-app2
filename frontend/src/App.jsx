@@ -30,46 +30,46 @@ const App = () => {
         <Route
           path="/"
           element={
-            isAuthenticated ? (
+            isAuthenticated && isOnboarded ? (
               <Layout showSidebar={true}>
                 <HomePage />
               </Layout>
             ) : (
-              <Navigate to={!isAuthenticated ? "/login" : "/"} />
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
             )
           }
         />
         <Route
           path="/signup"
           element={
-            !isAuthenticated ? <SignUpPage /> : <Navigate to={"/"} />
+            !isAuthenticated ? <SignUpPage /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />
           }
         />
         <Route
           path="/login"
           element={
-            !isAuthenticated ? <LoginPage /> : <Navigate to={"/"} />
+            !isAuthenticated ? <LoginPage /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />
           }
         />
         <Route
           path="/notifications"
           element={
-            isAuthenticated ? (
+            isAuthenticated && isOnboarded ? (
               <Layout showSidebar={true}>
                 <NotificationsPage />
               </Layout>
             ) : (
-              <Navigate to={!isAuthenticated ? "/login" : "/"} />
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
             )
           }
         />
         <Route
           path="/call/:id"
           element={
-            isAuthenticated ? (
+            isAuthenticated && isOnboarded ? (
               <CallPage />
             ) : (
-              <Navigate to={!isAuthenticated ? "/login" : "/"} />
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
             )
           }
         />
@@ -77,27 +77,30 @@ const App = () => {
         <Route
           path="/chat/:id"
           element={
-            isAuthenticated ? (
+            isAuthenticated && isOnboarded ? (
               <Layout showSidebar={false}>
                 <ChatPage />
               </Layout>
             ) : (
-              <Navigate to={!isAuthenticated ? "/login" : "/"} />
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
             )
           }
         />
 
-        {/* <Route
+        <Route
           path="/onboarding"
           element={
-            !isAuthenticated ? (
+            isAuthenticated ? (
+              !isOnboarded ? (
+                <OnboardingPage />
+              ) : (
+                <Navigate to="/" />
+              )
+            ) : (
               <Navigate to="/login" />
-            ) :
-            (
-              <OnboardingPage/>
             )
           }
-        /> */}
+        />
       </Routes>
 
       <Toaster />
